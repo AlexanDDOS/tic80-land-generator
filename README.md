@@ -25,7 +25,7 @@ This project is a part of my Rust practice and development of a Worms clone for 
 - [ ] CRC check for saved lands to prevent loading of corrupted saves
 
 ## Demo Cartridge
-Download the demo cartridge from the Release section or TIC-80 website. Alternatively, you can build it yourself with the `build.bat` or `build.sh` scripts.
+Download the demo cartridge from the [Releases](https://github.com/AlexanDDOS/tic80-land-generator/releases) section or [TIC-80 website](https://tic80.com/play?cart=4391). Alternatively, you can build it yourself with the `build.bat` or `build.sh` scripts.
 
 Land is loaded or generated automatically on the cartridge run, depending on the content of its map memory. You can save or re-generate it using the belowed controls.
 
