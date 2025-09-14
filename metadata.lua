@@ -1,0 +1,4 @@
+-- title:  Rust Land Generator
+-- author: AlexanDDOS
+-- desc:   A tech demo of destructable land/terrian generator for TIC-80 written in Rust and compiled into WASM. Full description: https://github.com/AlexanDDOS/tic80-land-generator
+-- script: wasm
