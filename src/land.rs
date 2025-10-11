@@ -1,7 +1,7 @@
 use crate::tic80::*;
 use crate::trace;
 use itertools::Itertools;
-use noise::{Perlin, NoiseFn};
+use noise::{Simplex, NoiseFn};
 
 // Common internal functions
 fn sigmoid(x: f64) -> f64 {
@@ -284,17 +284,18 @@ impl Land {
         self.seed = seed;
     }
 
-    /// Generate a random land using Perlin noise
+    /// Generate a random land using Simplex noise
     pub fn generate(&self) {
         self.clear();
         let (land_w, land_h) = self.size();
         let land_h_f64 = (self.water_height - 2) as f64;
-        let perlin = Perlin::new(self.seed);
+        let simplex = Simplex::new(self.seed);
         for x in 0..land_w {
             let x_norm = (x as f64) / (land_w as f64);
-            let point = [x_norm * 4.0];
-            let h0 = 0.5 + 0.25 * (perlin.get(point) + 1.0);
-            let board_w = 0.1;
+            let (k1, k2) = (3.0 + simplex.get([2.0, -1.0]), 5.0 + simplex.get([-1.0, 2.0]));
+            let point = [x_norm * 2.0, x_norm * 6.0];
+            let h0 = 0.4 + 0.25 * (simplex.get(point) + 1.0);
+            let board_w = 0.1 + 0.1 * simplex.get([1.0, -1.0]);
             let constrain = Land::board_constrain(x_norm, board_w);
             let h = land_h_f64 * (1.0 - (h0 * constrain));
             let y_start = std::cmp::min(h as i32, land_h - 1);
